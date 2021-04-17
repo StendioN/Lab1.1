@@ -4,6 +4,7 @@ from math import exp
 from kivy_garden.graph import Graph, MeshLinePlot
 from kivy.uix.widget import Widget
 from kivy.lang import Builder
+from kivy.uix.label import Label
 
 Builder.load_string('''
 <LineCircle>:
@@ -47,18 +48,22 @@ class Lab2App(App):
         plot.points = [(x * 0.1, exp(x * 0.1)) for x in range(-60, 60)]
         graph.add_plot(plot)
         return graph
-    def build(self):      
+    def build(self):
         self.icon = 'icon.png'
         tb_panel = TabbedPanel()
-        tb_panel.default_tab_text = 'exp(x)'
+        tb_panel.default_tab_text = 'Student'
+        tb_panel.default_tab_content = Label(text = 'Лялін Ігор\n' \
+                                                    'Група ІО-81\n' \
+                                                    'ЗК ІО-8118')
         graph = Lab2App.graphic(self)
-        tb_panel.default_tab_content = graph
-        th_text_head = TabbedPanelHeader(text='circle')
-        th_text_head.content = LineCircle()
-        tb_panel.add_widget(th_text_head)
+        th_text_head1 = TabbedPanelHeader(text='exp(x)')
+        th_text_head1.content = graph
+        tb_panel.add_widget(th_text_head1)
+        th_text_head2 = TabbedPanelHeader(text='circle')
+        th_text_head2.content = LineCircle()
+        tb_panel.add_widget(th_text_head2)
         return tb_panel
 
 
 if __name__ == '__main__':
     Lab2App().run()
-
